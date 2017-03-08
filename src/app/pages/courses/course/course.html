@@ -1,11 +1,11 @@
 <div class="course">
   <div class="content">
     <div class="header">
-      <span class="name">Name</span>
-      <span class="duration">1h 28m</span>
-      <span class="date">date</span>
+      <span class="name">{{ course.name }}</span>
+      <span class="duration">{{ course.duration }}</span>
+      <span class="date">{{ course.date }}</span>
     </div>
-    <div class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam voluptates sit debitis illum distinctio, velit ad iure eum, saepe quae!</div>
+    <div class="description">{{ course.description }}</div>
   </div>
   <div class="buttons">
     <a [routerLink]="'/course'" class="btn btn-block btn-primary">Edit course</a>

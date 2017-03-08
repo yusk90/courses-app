@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import {
   RouterModule
@@ -22,6 +23,9 @@ import { NoContentComponent } from './no-content';
     CourseDetailedComponent,
     NoContentComponent
   ],
-  imports: [ RouterModule ]
+  imports: [
+    RouterModule,
+    CommonModule
+  ]
 })
 export class PagesModule {}

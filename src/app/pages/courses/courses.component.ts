@@ -35,6 +35,11 @@ export class CoursesComponent implements OnInit {
     this.courses = query ? this.filterBy(properties, query) : this.cachedCourses;
   }
 
+  public deleteCourse(id: number): void {
+    this.courses.splice(this.courses.findIndex((course) => course.id === id), 1);
+    console.log('Deleted course:', id);
+  }
+
   private filterBy(properties: string[], query: string): Course[] {
     return this.courses.filter((course: Course) => {
       return properties.some((property) => course[property].search(query) > -1);

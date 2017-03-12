@@ -9,6 +9,6 @@
   </div>
   <div class="buttons">
     <a [routerLink]="'/course'" class="btn btn-block btn-primary">Edit course</a>
-    <a [routerLink]="'/'" class="btn btn-block btn-primary">Delete</a>
+    <a (click)="delete(course.id)" class="btn btn-block btn-primary">Delete</a>
   </div>
 </div>

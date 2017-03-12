@@ -13,7 +13,7 @@ export class CoursesComponent implements OnInit {
   public courses: Course[] = [{
     id: 1,
     name: 'Name 1',
-    duration: 60,
+    duration: 45,
     date: 'date',
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
   }, {

@@ -2,7 +2,7 @@
   <div class="content">
     <div class="header">
       <span class="name">{{ course.name }}</span>
-      <span class="duration">{{ course.duration }}</span>
+      <span class="duration">{{ course.duration | courseDuration }}</span>
       <span class="date">{{ course.date }}</span>
     </div>
     <div class="description">{{ course.description }}</div>

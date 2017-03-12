@@ -11,6 +11,7 @@ import { CoursesControlsComponent } from './courses/courses-controls';
 import { CourseComponent } from './courses/course';
 import { CourseDetailedComponent } from './course-detailed';
 import { NoContentComponent } from './no-content';
+import { CourseDurationPipe } from './courses/course/course-duration.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { NoContentComponent } from './no-content';
     CoursesControlsComponent,
     CourseComponent,
     CourseDetailedComponent,
-    NoContentComponent
+    NoContentComponent,
+    CourseDurationPipe
   ],
   exports: [
     CoursesComponent,

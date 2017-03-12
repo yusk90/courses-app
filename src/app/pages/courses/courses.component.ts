@@ -10,19 +10,19 @@ import { Course } from './course/course';
 })
 
 export class CoursesComponent implements OnInit {
-  public courses: Course[] = [new Course({
+  public courses: Course[] = [{
     id: 1,
     name: 'Name 1',
-    duration: '1h 28m',
+    duration: 60,
     date: 'date',
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
-  }), new Course({
+  }, {
     id: 2,
     name: 'Name 2',
-    duration: '1h 28m',
+    duration: 75,
     date: 'ame',
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
-  })];
+  }];
   private cachedCourses: Course[];
 
   public ngOnInit() {

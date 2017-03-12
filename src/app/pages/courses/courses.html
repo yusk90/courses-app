@@ -1,5 +1,6 @@
-
-
-<course></course>
-<course></course>
-<course></course>
+<div class="courses">
+  <courses-controls (onFilter)="filter($event)"></courses-controls>
+  <course *ngFor="let course of courses"
+          [course]="course"
+          (onDelete)="deleteCourse($event)"></course>
+</div>

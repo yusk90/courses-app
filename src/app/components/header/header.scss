@@ -1,3 +1,10 @@
+@import '~styles/variables';
+
 .header {
-  background: red;
+  margin-bottom: 10px;
+  background: $main-color;
+}
+
+.header-container {
+  display: flex;
 }

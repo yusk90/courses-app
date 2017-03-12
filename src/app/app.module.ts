@@ -27,6 +27,7 @@ import { AppState, InternalStateType } from './app.service';
 
 import { ComponentsModule } from './components';
 import { PagesModule } from './pages';
+import { SharedModule } from './shared';
 
 import '../styles/styles.scss';
 
@@ -54,6 +55,7 @@ type StoreType = {
     BrowserModule,
     ComponentsModule,
     PagesModule,
+    SharedModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })

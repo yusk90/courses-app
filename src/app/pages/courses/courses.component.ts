@@ -4,7 +4,6 @@ import { Course } from './course/course';
 
 @Component({
   selector: 'courses',
-  providers: [],
   styleUrls: [ './courses.scss' ],
   templateUrl: './courses.html'
 })

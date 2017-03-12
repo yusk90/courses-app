@@ -6,7 +6,6 @@ import {
 
 @Component({
   selector: 'courses-controls',
-  providers: [],
   styleUrls: [ './courses-controls.scss' ],
   templateUrl: './courses-controls.html'
 })

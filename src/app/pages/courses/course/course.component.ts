@@ -9,7 +9,6 @@ import { Course } from './course';
 
 @Component({
   selector: 'course',
-  providers: [],
   styleUrls: [ './course.scss' ],
   templateUrl: './course.html'
 })

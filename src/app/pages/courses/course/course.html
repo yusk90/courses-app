@@ -8,7 +8,7 @@
     <div class="description">{{ course.description }}</div>
   </div>
   <div class="buttons">
-    <a [routerLink]="'/course'" class="btn btn-block btn-primary">Edit course</a>
+    <a [routerLink]="[ '/course', course.id ]" class="btn btn-block btn-primary">Edit course</a>
     <a (click)="delete(course.id)" class="btn btn-block btn-primary">Delete</a>
   </div>
 </div>

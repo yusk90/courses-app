@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Course } from './course/course';
+import { Course } from '../../shared/course-interface';
+import { CoursesService } from '../../shared/courses.service';
 
 @Component({
   selector: 'courses',
@@ -9,23 +10,16 @@ import { Course } from './course/course';
 })
 
 export class CoursesComponent implements OnInit {
-  public courses: Course[] = [{
-    id: 1,
-    name: 'Name 1',
-    duration: 45,
-    date: 'date',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
-  }, {
-    id: 2,
-    name: 'Name 2',
-    duration: 75,
-    date: 'ame',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
-  }];
+  public courses: Course[];
   private cachedCourses: Course[];
 
+  constructor(private coursesService: CoursesService) {}
+
   public ngOnInit() {
-    this.cacheCourses();
+    this.coursesService.getCourses().then((courses) => {
+      this.courses = courses;
+      this.cacheCourses();
+    });
   }
 
   public filter(query: string): void {

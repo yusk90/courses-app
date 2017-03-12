@@ -5,7 +5,7 @@ import {
   EventEmitter
 } from '@angular/core';
 
-import { Course } from './course';
+import { Course } from '../../../shared/course-interface';
 
 @Component({
   selector: 'course',

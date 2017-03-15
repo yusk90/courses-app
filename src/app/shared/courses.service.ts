@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Course } from './course-interface';
 
-const courses = [{
+const courses: Course[] = [{
   id: 1,
   name: 'Name 1',
   duration: 45,
@@ -18,13 +18,11 @@ const courses = [{
 
 @Injectable()
 export class CoursesService {
-  public courses: Course[] = courses;
-
   public getCourses(): Promise<Course[]> {
-    return Promise.resolve(this.courses);
+    return Promise.resolve(courses);
   }
 
   public getCourseById(id: number): Promise<Course> {
-    return Promise.resolve(this.courses.find((course) => course.id === id));
+    return Promise.resolve(courses.find((course) => course.id === id));
   }
 }

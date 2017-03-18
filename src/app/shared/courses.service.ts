@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 
 import { Course } from './course-interface';
 
+const state = {
+  courses: []
+};
+
 const courses: Course[] = [{
   id: 1,
   name: 'Name 1',
@@ -18,6 +22,16 @@ const courses: Course[] = [{
 
 @Injectable()
 export class CoursesService {
+  public getState() {
+    return state;
+  }
+
+  public get(): void {
+    this.getCourses().then((data) => {
+      state.courses = data;
+    });
+  }
+
   public getCourses(): Promise<Course[]> {
     return Promise.resolve(courses);
   }

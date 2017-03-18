@@ -10,36 +10,30 @@ import { CoursesService } from '../../shared/courses.service';
 })
 
 export class CoursesComponent implements OnInit {
-  public courses: Course[];
-  private cachedCourses: Course[];
+  public coursesState;
 
-  constructor(private coursesService: CoursesService) {}
+  constructor(private coursesService: CoursesService) {
+    coursesService.get();
+  }
 
   public ngOnInit() {
-    this.coursesService.getCourses().then((courses) => {
-      this.courses = courses;
-      this.cacheCourses();
-    });
+    this.coursesState = this.coursesService.getState();
   }
 
   public filter(query: string): void {
     const properties = [ 'name', 'date' ];
 
-    this.courses = query ? this.filterBy(properties, query) : this.cachedCourses;
+    this.coursesState.courses = query ? this.filterBy(properties, query) : this.coursesState.courses;
   }
 
   public deleteCourse(id: number): void {
-    this.courses.splice(this.courses.findIndex((course) => course.id === id), 1);
+    this.coursesState.courses.splice(this.coursesState.courses.findIndex((course) => course.id === id), 1);
     console.log('Deleted course:', id);
   }
 
   private filterBy(properties: string[], query: string): Course[] {
-    return this.courses.filter((course: Course) => {
+    return this.coursesState.courses.filter((course: Course) => {
       return properties.some((property) => course[property].search(query) > -1);
     });
-  }
-
-  private cacheCourses(): void {
-    this.cachedCourses = this.courses;
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Course } from '../../shared/course-interface';
 import { CoursesService } from '../../shared/courses.service';
+import { ModalService } from '../../components/modal/modal.service';
 
 @Component({
   selector: 'courses',
@@ -13,7 +14,10 @@ export class CoursesComponent implements OnInit {
   public courses: Course[];
   private cachedCourses: Course[];
 
-  constructor(private coursesService: CoursesService) {}
+  constructor(
+    private coursesService: CoursesService,
+    private modalService: ModalService
+  ) {}
 
   public ngOnInit() {
     this.coursesService.getCourses().then((courses) => {
@@ -30,7 +34,16 @@ export class CoursesComponent implements OnInit {
 
   public deleteCourse(id: number): void {
     this.courses.splice(this.courses.findIndex((course) => course.id === id), 1);
-    console.log('Deleted course:', id);
+    this.coursesService.deleteCourse(id);
+  }
+
+  public openDeleteModal(id: number): void {
+    this.modalService.open({
+      content: `Delete course ${ id }?`,
+      submitButtonText: 'Yes',
+      cancelButtonText: 'No',
+      onSubmit: this.deleteCourse.bind(this, id)
+    });
   }
 
   private filterBy(properties: string[], query: string): Course[] {

@@ -13,6 +13,8 @@ import { CourseDetailedComponent } from './course-detailed';
 import { NoContentComponent } from './no-content';
 import { CourseDurationPipe } from './courses/course/course-duration.pipe';
 
+import { ComponentsModule } from '../components';
+
 @NgModule({
   declarations: [
     CoursesComponent,
@@ -32,7 +34,8 @@ import { CourseDurationPipe } from './courses/course/course-duration.pipe';
   imports: [
     RouterModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    ComponentsModule
   ]
 })
 export class PagesModule {}

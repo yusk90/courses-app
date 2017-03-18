@@ -25,4 +25,14 @@ export class CoursesService {
   public getCourseById(id: number): Promise<Course> {
     return Promise.resolve(courses.find((course) => course.id === id));
   }
+
+  public addCourse(course: Course): Course[] {
+    console.log('Added course:', course);
+    return courses;
+  }
+
+  public deleteCourse(id: number): Course[] {
+    console.log('Deleted course:', id);
+    return courses;
+  }
 }

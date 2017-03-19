@@ -14,9 +14,7 @@ import { LoginPanelComponent } from './header/login-panel';
   ],
   exports: [
     HeaderComponent,
-    FooterComponent,
-    LogoComponent,
-    LoginPanelComponent
+    FooterComponent
   ]
 })
 export class ComponentsModule {}

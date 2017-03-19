@@ -24,13 +24,6 @@ import { ComponentsModule } from '../components';
     NoContentComponent,
     CourseDurationPipe
   ],
-  exports: [
-    CoursesComponent,
-    CoursesControlsComponent,
-    CourseComponent,
-    CourseDetailedComponent,
-    NoContentComponent
-  ],
   imports: [
     RouterModule,
     CommonModule,

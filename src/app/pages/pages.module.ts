@@ -11,6 +11,7 @@ import { CoursesControlsComponent } from './courses/courses-controls';
 import { CourseComponent } from './courses/course';
 import { CourseDetailedComponent } from './course-detailed';
 import { NoContentComponent } from './no-content';
+import { LoginComponent } from './login';
 import { CourseDurationPipe } from './courses/course/course-duration.pipe';
 
 import { ComponentsModule } from '../components';
@@ -22,6 +23,7 @@ import { ComponentsModule } from '../components';
     CourseComponent,
     CourseDetailedComponent,
     NoContentComponent,
+    LoginComponent,
     CourseDurationPipe
   ],
   imports: [

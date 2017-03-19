@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Course } from '../../shared/course-interface';
 import { CoursesService } from '../../shared/courses.service';
-import { ModalService } from '../../components/modal/modal.service';
+import { ModalService } from '../../shared/modal/modal.service';
 
 @Component({
   selector: 'courses',

@@ -35,4 +35,9 @@ export class CoursesService {
     console.log('Deleted course:', id);
     return courses;
   }
+
+  public updateCourse(course: Course): Course {
+    console.log('Updated course:', course);
+    return course;
+  }
 }

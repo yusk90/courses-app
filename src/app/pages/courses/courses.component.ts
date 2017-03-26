@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 import { Course } from '../../shared/course-interface';
 import { CoursesService } from '../../shared/courses.service';
@@ -16,18 +17,19 @@ export class CoursesComponent implements OnInit {
 
   constructor(
     private coursesService: CoursesService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private datePipe: DatePipe
   ) {}
 
   public ngOnInit() {
     this.coursesService.getCourses().then((courses) => {
-      this.courses = courses;
+      this.courses = this.prepareCourses(courses);
       this.cacheCourses();
     });
   }
 
   public filter(query: string): void {
-    const properties = [ 'name', 'date' ];
+    const properties = [ 'title', 'date' ];
 
     this.courses = query ? this.filterBy(properties, query) : this.cachedCourses;
   }
@@ -43,6 +45,15 @@ export class CoursesComponent implements OnInit {
       submitButtonText: 'Yes',
       cancelButtonText: 'No',
       onSubmit: this.deleteCourse.bind(this, id)
+    });
+  }
+
+  private prepareCourses(courses) {
+    return courses.map((course: Course) => {
+      const preparedCourse = Object.assign({}, course);
+
+      preparedCourse.date = this.datePipe.transform(course.date, 'dd-MM-yyyy');
+      return preparedCourse;
     });
   }
 

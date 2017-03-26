@@ -1,43 +1,45 @@
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+
+import 'rxjs/add/operator/toPromise';
 
 import { Course } from './course-interface';
 
-const courses: Course[] = [{
-  id: 1,
-  name: 'Name 1',
-  duration: 45,
-  date: 'date',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
-}, {
-  id: 2,
-  name: 'Name 2',
-  duration: 75,
-  date: 'ame',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
-}];
+const apiUrl = 'http://localhost:3000/api';
 
 @Injectable()
 export class CoursesService {
+  constructor(private http: Http) {}
+
   public getCourses(): Promise<Course[]> {
-    return Promise.resolve(courses);
+    return this.http
+      .get(`${ apiUrl }/courses`)
+      .toPromise()
+      .then((response) => response.json() as Course[]);
   }
 
   public getCourseById(id: number): Promise<Course> {
-    return Promise.resolve(courses.find((course) => course.id === id));
+    return this.http
+      .get(`${ apiUrl }/courses/${ id }`)
+      .toPromise()
+      .then((response) => response.json() as Course);
   }
 
-  public addCourse(course: Course): Course[] {
-    console.log('Added course:', course);
-    return courses;
+  public addCourse(course: Course): Promise<any> {
+    return this.http
+      .post(`${ apiUrl }/courses`, course)
+      .toPromise();
   }
 
-  public deleteCourse(id: number): Course[] {
-    console.log('Deleted course:', id);
-    return courses;
+  public deleteCourse(id: number): Promise<any> {
+    return this.http
+      .delete(`${ apiUrl }/courses/${ id }`)
+      .toPromise();
   }
 
-  public updateCourse(course: Course): Course {
-    console.log('Updated course:', course);
-    return course;
+  public updateCourse(course: Course): Promise<any> {
+    return this.http
+      .patch(`${ apiUrl }/courses/${ course.id }`, course)
+      .toPromise();
   }
 }

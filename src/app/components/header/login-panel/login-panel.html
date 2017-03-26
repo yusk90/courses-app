@@ -1,2 +1,8 @@
-User Name<br />
-<a href="#">Logoff</a>
+<div *ngIf="authorizationService.isAuthorized">
+  User Name<br />
+  <a [routerLink]="'/'"
+     (click)="authorizationService.logoff()">Logoff</a>
+</div>
+<div *ngIf="!authorizationService.isAuthorized">
+  <a [routerLink]="'/login'">Login</a>
+</div>

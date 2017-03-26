@@ -1,13 +1,15 @@
 <div class="courses-controls">
-  <div class="input-group">
+  <form class="input-group"
+        (ngSubmit)="filter(filterQuery)">
     <input type="text"
            class="form-control"
            placeholder="Name fragment or date"
+           name="filterQuery"
            [(ngModel)]="filterQuery">
     <span class="input-group-btn">
       <button class="btn btn-primary"
-              (click)="filter(filterQuery)">Filter</button>
+              type="submit">Filter</button>
     </span>
-  </div>
+  </form>
   <button class="btn btn-primary add-course">Add course</button>
 </div>

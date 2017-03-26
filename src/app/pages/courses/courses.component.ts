@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 import { Course } from '../../shared/course-interface';
 import { CoursesService } from '../../shared/courses.service';
-import { ModalService } from '../../shared/modal/modal.service';
 
 @Component({
   selector: 'courses',
@@ -12,12 +15,15 @@ import { ModalService } from '../../shared/modal/modal.service';
 })
 
 export class CoursesComponent implements OnInit {
+  @ViewChild('deleteModal')
+  public deleteModal;
+
   public courses: Course[];
+  public courseIdForDelete: number;
   private cachedCourses: Course[];
 
   constructor(
     private coursesService: CoursesService,
-    private modalService: ModalService,
     private datePipe: DatePipe
   ) {}
 
@@ -35,17 +41,14 @@ export class CoursesComponent implements OnInit {
   }
 
   public deleteCourse(id: number): void {
+    this.deleteModal.hide();
     this.courses.splice(this.courses.findIndex((course) => course.id === id), 1);
     this.coursesService.deleteCourse(id);
   }
 
   public openDeleteModal(id: number): void {
-    this.modalService.open({
-      content: `Delete course ${ id }?`,
-      submitButtonText: 'Yes',
-      cancelButtonText: 'No',
-      onSubmit: this.deleteCourse.bind(this, id)
-    });
+    this.courseIdForDelete = id;
+    this.deleteModal.show();
   }
 
   private prepareCourses(courses) {

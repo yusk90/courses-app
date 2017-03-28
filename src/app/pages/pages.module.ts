@@ -3,8 +3,6 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { ModalModule } from 'ng2-bootstrap/modal';
-
 import { CoursesComponent } from './courses';
 import { CoursesControlsComponent } from './courses/courses-controls';
 import { CourseComponent } from './courses/course';
@@ -32,8 +30,7 @@ import { ComponentsModule } from '../components';
     RouterModule,
     CommonModule,
     FormsModule,
-    ComponentsModule,
-    ModalModule
+    ComponentsModule
   ]
 })
 export class PagesModule {}

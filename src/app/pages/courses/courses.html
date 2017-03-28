@@ -3,35 +3,4 @@
   <course *ngFor="let course of courses"
           [course]="course"
           (onDelete)="openDeleteModal($event)"></course>
-  <div class="modal fade"
-       bsModal
-       #deleteModal="bs-modal"
-       [config]="{
-         backdrop: 'static'
-       }"
-       tabindex="-1"
-       role="dialog"
-       aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button class="close"
-                  aria-label="Close"
-                  (click)="deleteModal.hide()">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          Delete this course?
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-primary"
-                  (click)="deleteCourse(courseIdForDelete)">Yes</button>
-          <button type="button"
-                  class="btn btn-default"
-                  (click)="deleteModal.hide()">No</button>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>

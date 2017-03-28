@@ -1,12 +1,11 @@
-import {
-  Component,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 import { Course } from '../../shared/course-interface';
 import { CoursesService } from '../../shared/courses.service';
+import {
+  ConfirmationModalService
+} from '../../shared/confirmation-modal/confirmation-modal.service';
 
 @Component({
   selector: 'courses',
@@ -15,15 +14,13 @@ import { CoursesService } from '../../shared/courses.service';
 })
 
 export class CoursesComponent implements OnInit {
-  @ViewChild('deleteModal')
-  public deleteModal;
-
   public courses: Course[];
   public courseIdForDelete: number;
   private cachedCourses: Course[];
 
   constructor(
     private coursesService: CoursesService,
+    private confirmationModalService: ConfirmationModalService,
     private datePipe: DatePipe
   ) {}
 
@@ -41,14 +38,21 @@ export class CoursesComponent implements OnInit {
   }
 
   public deleteCourse(id: number): void {
-    this.deleteModal.hide();
-    this.courses.splice(this.courses.findIndex((course) => course.id === id), 1);
+    this.optimisticDelete(id);
     this.coursesService.deleteCourse(id);
   }
 
-  public openDeleteModal(id: number): void {
-    this.courseIdForDelete = id;
-    this.deleteModal.show();
+  public openDeleteModal(courseId: number): void {
+    this.confirmationModalService.open({
+      content: 'Delete course?',
+      submitButtonText: 'Yes',
+      cancelButtonText: 'No',
+      onSubmit: this.deleteCourse.bind(this, courseId)
+    });
+  }
+
+  private optimisticDelete(id: number): void {
+    this.courses.splice(this.courses.findIndex((course) => course.id === id), 1);
   }
 
   private prepareCourses(courses) {

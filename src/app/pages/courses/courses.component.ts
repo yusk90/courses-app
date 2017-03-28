@@ -35,7 +35,7 @@ export class CoursesComponent implements OnInit {
   }
 
   public filter(query: string): void {
-    const properties = [ 'title', 'date' ];
+    const properties = [ 'title', 'displayDate' ];
 
     this.courses = query ? this.filterBy(properties, query) : this.cachedCourses;
   }
@@ -55,7 +55,7 @@ export class CoursesComponent implements OnInit {
     return courses.map((course: Course) => {
       const preparedCourse = Object.assign({}, course);
 
-      preparedCourse.date = this.datePipe.transform(course.date, 'dd-MM-yyyy');
+      preparedCourse.displayDate = this.datePipe.transform(course.date, 'dd-MM-yyyy');
       return preparedCourse;
     });
   }

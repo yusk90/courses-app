@@ -17,9 +17,9 @@ import {
 })
 
 export class CoursesComponent implements OnInit {
-  public courses: Course[];
+  public courses: Course[] = [];
   public courseIdForDelete: number;
-  private cachedCourses: Course[];
+  private cachedCourses: Course[] = [];
 
   constructor(
     private coursesService: CoursesService,

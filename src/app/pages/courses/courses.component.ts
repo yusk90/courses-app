@@ -6,6 +6,9 @@ import { CoursesService } from '../../shared/courses.service';
 import {
   ConfirmationModalService
 } from '../../shared/confirmation-modal/confirmation-modal.service';
+import {
+  LoaderBlockService
+} from '../../shared/loader-block/loader-block.service';
 
 @Component({
   selector: 'courses',
@@ -21,6 +24,7 @@ export class CoursesComponent implements OnInit {
   constructor(
     private coursesService: CoursesService,
     private confirmationModalService: ConfirmationModalService,
+    private loaderBlockService: LoaderBlockService,
     private datePipe: DatePipe
   ) {}
 
@@ -38,8 +42,12 @@ export class CoursesComponent implements OnInit {
   }
 
   public deleteCourse(id: number): void {
-    this.optimisticDelete(id);
-    this.coursesService.deleteCourse(id);
+    this.loaderBlockService.show();
+    this.coursesService.deleteCourse(id)
+      .then(() => {
+        this.loaderBlockService.hide();
+        this.courses.splice(this.courses.findIndex((course) => course.id === id), 1);
+      });
   }
 
   public openDeleteModal(courseId: number): void {
@@ -49,10 +57,6 @@ export class CoursesComponent implements OnInit {
       cancelButtonText: 'No',
       onSubmit: this.deleteCourse.bind(this, courseId)
     });
-  }
-
-  private optimisticDelete(id: number): void {
-    this.courses.splice(this.courses.findIndex((course) => course.id === id), 1);
   }
 
   private prepareCourses(courses) {

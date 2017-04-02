@@ -5,19 +5,24 @@ import { ModalModule } from 'ng2-bootstrap/modal';
 
 import { CoursesService } from './courses.service';
 import { ConfirmationModalComponent } from './confirmation-modal';
+import { LoaderBlockComponent } from './loader-block';
 import { ConfirmationModalService } from './confirmation-modal/confirmation-modal.service';
+import { LoaderBlockService } from './loader-block/loader-block.service';
 import { AuthorizationService } from './authorization.service';
 
 @NgModule({
   declarations: [
-    ConfirmationModalComponent
+    ConfirmationModalComponent,
+    LoaderBlockComponent
   ],
   exports: [
-    ConfirmationModalComponent
+    ConfirmationModalComponent,
+    LoaderBlockComponent
   ],
   providers: [
     CoursesService,
     ConfirmationModalService,
+    LoaderBlockService,
     AuthorizationService
   ],
   imports: [

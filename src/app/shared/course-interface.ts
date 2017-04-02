@@ -3,5 +3,6 @@ export interface Course {
   name: string;
   duration: number;
   date: string;
+  displayDate: string;
   description: string;
 }

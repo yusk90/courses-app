@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 import { Course } from '../../shared/course-interface';
 import { CoursesService } from '../../shared/courses.service';
-import { ModalService } from '../../shared/modal/modal.service';
+import {
+  ConfirmationModalService
+} from '../../shared/confirmation-modal/confirmation-modal.service';
+import {
+  LoaderBlockService
+} from '../../shared/loader-block/loader-block.service';
 
 @Component({
   selector: 'courses',
@@ -12,37 +18,53 @@ import { ModalService } from '../../shared/modal/modal.service';
 
 export class CoursesComponent implements OnInit {
   public courses: Course[];
+  public courseIdForDelete: number;
   private cachedCourses: Course[];
 
   constructor(
     private coursesService: CoursesService,
-    private modalService: ModalService
+    private confirmationModalService: ConfirmationModalService,
+    private loaderBlockService: LoaderBlockService,
+    private datePipe: DatePipe
   ) {}
 
   public ngOnInit() {
     this.coursesService.getCourses().then((courses) => {
-      this.courses = courses;
+      this.courses = this.prepareCourses(courses);
       this.cacheCourses();
     });
   }
 
   public filter(query: string): void {
-    const properties = [ 'name', 'date' ];
+    const properties = [ 'title', 'displayDate' ];
 
     this.courses = query ? this.filterBy(properties, query) : this.cachedCourses;
   }
 
   public deleteCourse(id: number): void {
-    this.courses.splice(this.courses.findIndex((course) => course.id === id), 1);
-    this.coursesService.deleteCourse(id);
+    this.loaderBlockService.show();
+    this.coursesService.deleteCourse(id)
+      .then(() => {
+        this.loaderBlockService.hide();
+        this.courses.splice(this.courses.findIndex((course) => course.id === id), 1);
+      });
   }
 
-  public openDeleteModal(id: number): void {
-    this.modalService.open({
-      content: `Delete course ${ id }?`,
+  public openDeleteModal(courseId: number): void {
+    this.confirmationModalService.open({
+      content: 'Delete course?',
       submitButtonText: 'Yes',
       cancelButtonText: 'No',
-      onSubmit: this.deleteCourse.bind(this, id)
+      onSubmit: this.deleteCourse.bind(this, courseId)
+    });
+  }
+
+  private prepareCourses(courses) {
+    return courses.map((course: Course) => {
+      const preparedCourse = Object.assign({}, course);
+
+      preparedCourse.displayDate = this.datePipe.transform(course.date, 'dd-MM-yyyy');
+      return preparedCourse;
     });
   }
 

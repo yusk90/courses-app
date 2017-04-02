@@ -9,28 +9,28 @@ interface ModalFields {
 }
 
 @Injectable()
-export class ModalService {
+export class ConfirmationModalService {
+  public modal;
   public data: ModalFields = {
     content: '',
     submitButtonText: 'Submit',
     cancelButtonText: 'Cancel',
-    onSubmit: () => {},
-    onClose: () => {}
+    onSubmit: Function.prototype,
+    onClose: Function.prototype
   };
-  public opened: boolean = false;
-
-  public close(): void {
-    this.data.onClose();
-    this.opened = false;
-  }
 
   public open(data: ModalFields): void {
     Object.assign(this.data, data);
-    this.opened = true;
+    this.modal.show();
+  }
+
+  public close(): void {
+    this.data.onClose();
+    this.modal.hide();
   }
 
   public submit(): void {
     this.data.onSubmit();
-    this.close();
+    this.modal.hide();
   }
 }

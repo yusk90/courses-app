@@ -15,6 +15,8 @@ import {
   PreloadAllModules
 } from '@angular/router';
 
+import { ModalModule } from 'ng2-bootstrap/modal';
+
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -58,7 +60,8 @@ type StoreType = {
     SharedModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+    ModalModule.forRoot()
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

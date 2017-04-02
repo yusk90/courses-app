@@ -1,25 +1,33 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { ModalModule } from 'ng2-bootstrap/modal';
+
 import { CoursesService } from './courses.service';
-import { ModalComponent } from './modal';
-import { ModalService } from './modal/modal.service';
+import { ConfirmationModalComponent } from './confirmation-modal';
+import { LoaderBlockComponent } from './loader-block';
+import { ConfirmationModalService } from './confirmation-modal/confirmation-modal.service';
+import { LoaderBlockService } from './loader-block/loader-block.service';
 import { AuthorizationService } from './authorization.service';
 
 @NgModule({
   declarations: [
-    ModalComponent
+    ConfirmationModalComponent,
+    LoaderBlockComponent
   ],
   exports: [
-    ModalComponent
+    ConfirmationModalComponent,
+    LoaderBlockComponent
   ],
   providers: [
     CoursesService,
-    ModalService,
+    ConfirmationModalService,
+    LoaderBlockService,
     AuthorizationService
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ModalModule
   ]
 })
 export class SharedModule {}

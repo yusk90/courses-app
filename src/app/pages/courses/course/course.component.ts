@@ -2,7 +2,8 @@ import {
   Component,
   Input,
   Output,
-  EventEmitter
+  EventEmitter,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import { Course } from '../../../shared/course-interface';
@@ -10,7 +11,8 @@ import { Course } from '../../../shared/course-interface';
 @Component({
   selector: 'course',
   styleUrls: [ './course.scss' ],
-  templateUrl: './course.html'
+  templateUrl: './course.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class CourseComponent {

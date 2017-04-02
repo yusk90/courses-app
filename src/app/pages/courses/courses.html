@@ -1,6 +1,6 @@
 <div class="courses">
   <courses-controls (onFilter)="filter($event)"></courses-controls>
-  <course *ngFor="let course of courses"
+  <course *ngFor="let course of (courses | orderByDate : orderDirections[1])"
           [course]="course"
           (onDelete)="openDeleteModal($event)"></course>
   <div *ngIf="!courses.length">

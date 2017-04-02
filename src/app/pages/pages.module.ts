@@ -13,6 +13,7 @@ import { CourseDurationPipe } from './courses/course/course-duration.pipe';
 import {
   CreationDateHighlightDirective
 } from './courses/course/creation-date-highlight.directive';
+import { OrderByDatePipe } from './courses/order-by-date.pipe';
 
 import { ComponentsModule } from '../components';
 
@@ -25,7 +26,8 @@ import { ComponentsModule } from '../components';
     NoContentComponent,
     LoginComponent,
     CourseDurationPipe,
-    CreationDateHighlightDirective
+    CreationDateHighlightDirective,
+    OrderByDatePipe
   ],
   providers: [
     DatePipe

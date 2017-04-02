@@ -19,6 +19,7 @@ import {
 export class CoursesComponent implements OnInit {
   public courses: Course[] = [];
   public courseIdForDelete: number;
+  public orderDirections: string[] = [ 'asc', 'desc' ];
   private cachedCourses: Course[] = [];
 
   constructor(
@@ -64,6 +65,7 @@ export class CoursesComponent implements OnInit {
       const preparedCourse = Object.assign({}, course);
 
       preparedCourse.displayDate = this.datePipe.transform(course.date, 'dd-MM-yyyy');
+      preparedCourse.dateInMs = new Date(course.date).getTime();
       return preparedCourse;
     });
   }

@@ -26,11 +26,20 @@
 }
 
 .duration {
-  flex: 0 0 50px;
+  flex: 0 0 auto;
 }
 
 .date {
   flex: 0 0 100px;
   margin-left: auto;
   text-align: right;
+}
+
+.top-rated {
+  width: 18px;
+  height: 18px;
+  margin-left: 5px;
+  background-image: url(./assets/images/star-icon.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
 }

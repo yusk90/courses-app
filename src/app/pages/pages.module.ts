@@ -10,6 +10,10 @@ import { CourseDetailedComponent } from './course-detailed';
 import { NoContentComponent } from './no-content';
 import { LoginComponent } from './login';
 import { CourseDurationPipe } from './courses/course/course-duration.pipe';
+import {
+  CreationDateHighlightDirective
+} from './courses/course/creation-date-highlight.directive';
+import { OrderByDatePipe } from './courses/order-by-date.pipe';
 
 import { ComponentsModule } from '../components';
 
@@ -21,7 +25,9 @@ import { ComponentsModule } from '../components';
     CourseDetailedComponent,
     NoContentComponent,
     LoginComponent,
-    CourseDurationPipe
+    CourseDurationPipe,
+    CreationDateHighlightDirective,
+    OrderByDatePipe
   ],
   providers: [
     DatePipe

@@ -1,8 +1,10 @@
-<div class="course">
+<div class="course"
+     [creationDateHighlight]="course.date">
   <div class="content">
     <div class="header">
       <span class="title">{{ course.title }}</span>
       <span class="duration">{{ course.duration | courseDuration }}</span>
+      <span class="top-rated" *ngIf="course.topRated"></span>
       <span class="date">{{ course.displayDate }}</span>
     </div>
     <div class="description">{{ course.description }}</div>

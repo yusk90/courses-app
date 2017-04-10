@@ -17,9 +17,10 @@ import {
 })
 
 export class CoursesComponent implements OnInit {
-  public courses: Course[];
+  public courses: Course[] = [];
   public courseIdForDelete: number;
-  private cachedCourses: Course[];
+  public orderDirections: string[] = [ 'asc', 'desc' ];
+  private cachedCourses: Course[] = [];
 
   constructor(
     private coursesService: CoursesService,
@@ -64,6 +65,7 @@ export class CoursesComponent implements OnInit {
       const preparedCourse = Object.assign({}, course);
 
       preparedCourse.displayDate = this.datePipe.transform(course.date, 'dd-MM-yyyy');
+      preparedCourse.dateInMs = new Date(course.date).getTime();
       return preparedCourse;
     });
   }

@@ -9,6 +9,9 @@ import { CourseComponent } from './courses/course';
 import { CourseDetailedComponent } from './course-detailed';
 import { NoContentComponent } from './no-content';
 import { LoginComponent } from './login';
+import { NewCourseComponent } from './new-course';
+import { CourseDateComponent } from './new-course/course-date';
+import { CourseDurationComponent } from './new-course/course-duration';
 import { CourseDurationPipe } from './courses/course/course-duration.pipe';
 import {
   CreationDateHighlightDirective
@@ -25,6 +28,9 @@ import { ComponentsModule } from '../components';
     CourseDetailedComponent,
     NoContentComponent,
     LoginComponent,
+    NewCourseComponent,
+    CourseDateComponent,
+    CourseDurationComponent,
     CourseDurationPipe,
     CreationDateHighlightDirective,
     OrderByDatePipe

@@ -1,8 +1,8 @@
-<div *ngIf="authorizationService.isAuthorized">
+<div *ngIf="isAuthorized">
   User Name<br />
   <a [routerLink]="'/'"
-     (click)="authorizationService.logoff()">Logoff</a>
+     (click)="authorizationService.logOut()">Logout</a>
 </div>
-<div *ngIf="!authorizationService.isAuthorized">
+<div *ngIf="!isAuthorized">
   <a [routerLink]="'/login'">Login</a>
 </div>

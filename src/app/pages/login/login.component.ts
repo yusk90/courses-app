@@ -10,21 +10,19 @@ import { AuthorizationService } from '../../shared/authorization.service';
 })
 
 export class LoginComponent {
-  public name: string;
+  public username: string;
   public password: string;
+  public isLoginDataIncorrect: boolean = false;
 
   constructor(
     private authorizationService: AuthorizationService,
     private router: Router
   ) {}
 
-  public login(): void {
-    if (!this.name || !this.password) {
-      alert('Name and password are required.');
-      return;
-    }
+  public logIn(): void {
+    this.isLoginDataIncorrect = false;
     this.authorizationService
-      .login(this.name, this.password)
+      .logIn(this.username, this.password)
       .then(this.onLoginSuccess.bind(this))
       .catch(this.onLoginFail.bind(this));
   }
@@ -33,7 +31,7 @@ export class LoginComponent {
     this.router.navigate(['/']);
   }
 
-  private onLoginFail(error: string): void {
-    alert(error);
+  private onLoginFail(): void {
+    this.isLoginDataIncorrect = true;
   }
 }

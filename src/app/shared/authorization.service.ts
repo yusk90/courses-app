@@ -1,28 +1,38 @@
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 
-const NAME = 'admin';
-const PASSWORD = '1';
+import { CookieService } from 'ngx-cookie';
+
+import { API_URL } from './constants';
+
+const TOKEN_NAME = 'app_token';
 
 @Injectable()
 export class AuthorizationService {
-  public isAuthorized: boolean = false;
+  constructor(
+    private http: Http,
+    private cookieService: CookieService
+  ) {}
 
-  public login(name: string, password: string) {
-    return new Promise((resolve, reject) => {
-      if (name === NAME && password === PASSWORD) {
-        this.isAuthorized = true;
-        resolve();
-      }
-      if (name !== NAME) {
-        reject('User is not found.');
-      }
-      if (password !== PASSWORD) {
-        reject('Password is incorrect.');
-      }
-    });
+  public logIn(username: string, password: string) {
+    return this.http
+      .post(`${ API_URL }/users/login`, {
+        username,
+        password
+      })
+      .toPromise()
+      .then(this.setToken.bind(this));
   }
 
-  public logoff(): void {
-    this.isAuthorized = false;
+  public logOut(): void {
+    this.cookieService.remove(TOKEN_NAME);
+  }
+
+  public isAuthorized(): boolean {
+    return !!this.cookieService.get(TOKEN_NAME);
+  }
+
+  private setToken(response): void {
+    this.cookieService.put(TOKEN_NAME, response.json().id);
   }
 }

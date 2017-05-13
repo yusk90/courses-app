@@ -16,6 +16,7 @@ import {
 } from '@angular/router';
 
 import { ModalModule } from 'ng2-bootstrap/modal';
+import { CookieModule } from 'ngx-cookie';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -61,7 +62,8 @@ type StoreType = {
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    CookieModule.forRoot()
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

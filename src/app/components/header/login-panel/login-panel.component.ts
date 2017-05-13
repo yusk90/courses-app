@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
 
 import { AuthorizationService } from '../../../shared/authorization.service';
 
@@ -8,6 +11,12 @@ import { AuthorizationService } from '../../../shared/authorization.service';
   templateUrl: './login-panel.html'
 })
 
-export class LoginPanelComponent {
+export class LoginPanelComponent implements OnInit {
+  public isAuthorized: boolean;
+
   constructor(public authorizationService: AuthorizationService) {}
+
+  public ngOnInit() {
+    this.isAuthorized = this.authorizationService.isAuthorized();
+  }
 }

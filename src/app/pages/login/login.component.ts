@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthorizationService } from '../../shared/authorization.service';
@@ -36,5 +36,6 @@ export class LoginComponent {
 
   private onLoginFail(): void {
     this.isLoginDataIncorrect = true;
+    this.password = '';
   }
 }

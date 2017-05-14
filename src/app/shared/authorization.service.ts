@@ -28,7 +28,7 @@ export class AuthorizationService {
     this.cookieService.remove(TOKEN_NAME);
   }
 
-  public isAuthorized(): boolean {
+  public isLoggedIn(): boolean {
     return !!this.cookieService.get(TOKEN_NAME);
   }
 

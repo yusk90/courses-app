@@ -5,7 +5,8 @@ import { CookieService } from 'ngx-cookie';
 
 import { API_URL } from './constants';
 
-const TOKEN_NAME = 'app_token';
+const TOKEN = 'app_token';
+export const USER_ID = 'user_id';
 
 @Injectable()
 export class AuthorizationService {
@@ -21,18 +22,26 @@ export class AuthorizationService {
         password
       })
       .toPromise()
-      .then(this.setToken.bind(this));
+      .then(this.onSuccessLogIn.bind(this));
   }
 
   public logOut(): void {
-    this.cookieService.remove(TOKEN_NAME);
+    this.cookieService.remove(TOKEN);
+    this.cookieService.remove(USER_ID);
+  }
+
+  public getToken(): string {
+    return this.cookieService.get(TOKEN);
   }
 
   public isLoggedIn(): boolean {
-    return !!this.cookieService.get(TOKEN_NAME);
+    return !!this.getToken();
   }
 
-  private setToken(response): void {
-    this.cookieService.put(TOKEN_NAME, response.json().id);
+  private onSuccessLogIn(response): void {
+    const data = response.json();
+
+    this.cookieService.put(TOKEN, data.id);
+    this.cookieService.put(USER_ID, data.userId);
   }
 }

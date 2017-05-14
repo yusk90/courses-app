@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthorizationService } from '../../shared/authorization.service';
+import { UserService } from '../../shared/user.service';
 
 @Component({
   selector: 'login',
@@ -16,6 +17,7 @@ export class LoginComponent {
 
   constructor(
     private authorizationService: AuthorizationService,
+    private userService: UserService,
     private router: Router
   ) {}
 
@@ -28,7 +30,8 @@ export class LoginComponent {
   }
 
   private onLoginSuccess(): void {
-    this.router.navigate(['/']);
+    this.userService.getUserInfo();
+    this.router.navigate([ '/' ]);
   }
 
   private onLoginFail(): void {

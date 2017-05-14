@@ -30,7 +30,7 @@ export class NewCourseComponent {
   }
 
   private onAddSuccess(): void {
-    this.router.navigate(['/courses']);
+    this.router.navigate([ '/courses' ]);
   }
 
   private onAddFail(res): void {

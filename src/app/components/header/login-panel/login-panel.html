@@ -1,7 +1,7 @@
 <div *ngIf="authorizationService.isLoggedIn()">
-  User Name<br />
+  <span class="name">{{ userService.info?.name }}</span>
   <a [routerLink]="'/'"
-     (click)="authorizationService.logOut()">Logout</a>
+     (click)="logOut()">Logout</a>
 </div>
 <div *ngIf="!authorizationService.isLoggedIn()">
   <a [routerLink]="'/login'">Login</a>

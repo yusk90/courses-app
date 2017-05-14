@@ -10,6 +10,7 @@ import { ConfirmationModalService } from './confirmation-modal/confirmation-moda
 import { LoaderBlockService } from './loader-block/loader-block.service';
 import { AuthorizationService } from './authorization.service';
 import { AuthGuard } from './auth-guard.service';
+import { UserService } from './user.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AuthGuard } from './auth-guard.service';
     ConfirmationModalService,
     LoaderBlockService,
     AuthorizationService,
-    AuthGuard
+    AuthGuard,
+    UserService
   ],
   imports: [
     CommonModule,

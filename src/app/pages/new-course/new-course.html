@@ -1,27 +1,52 @@
 <form class="form-horizontal new-course"
       name="newCourseForm"
+      #newCourseForm="ngForm"
       (ngSubmit)="addCourse()"
       novalidate>
   <div class="form-group">
     <label for="title" class="col-sm-4 control-label">Title *</label>
-    <div class="col-sm-8">
+    <div class="col-sm-8"
+         [ngClass]="{
+           'has-error': titleInput.touched && !titleInput.valid
+         }">
       <input type="text"
              class="form-control"
              id="title"
              name="title"
              [(ngModel)]="courseData.title"
+             #titleInput="ngModel"
+             maximumLength="50"
              required>
+      <div *ngIf="titleInput.touched && titleInput.errors"
+           class="error-messages">
+        <div *ngIf="titleInput.errors.required">* enter</div>
+        <div *ngIf="titleInput.errors.maximumLength">
+          Max length is {{ titleInput.errors.maximumLength.maxLength }} symbols.
+        </div>
+      </div>
     </div>
   </div>
   <div class="form-group">
     <label for="description" class="col-sm-4 control-label">Description *</label>
-    <div class="col-sm-8">
+    <div class="col-sm-8"
+         [ngClass]="{
+           'has-error': descriptionInput.touched && !descriptionInput.valid
+         }">
       <textarea rows="3"
                 class="form-control"
                 id="description"
                 name="description"
                 [(ngModel)]="courseData.description"
+                #descriptionInput="ngModel"
+                maximumLength="55"
                 required></textarea>
+      <div *ngIf="descriptionInput.touched && descriptionInput.errors"
+           class="error-messages">
+        <div *ngIf="descriptionInput.errors.required">* enter</div>
+        <div *ngIf="descriptionInput.errors.maximumLength">
+          Max length is {{ descriptionInput.errors.maximumLength.maxLength }} symbols.
+        </div>
+      </div>
     </div>
   </div>
   <div class="form-group">
@@ -42,7 +67,8 @@
   <div class="form-group">
     <div class="col-sm-offset-4 col-sm-8">
       <button type="submit"
-              class="btn btn-primary">Add</button>
+              class="btn btn-primary"
+              [disabled]="!newCourseForm.valid">Add</button>
       <button type="button"
               class="btn"
               [routerLink]="'/'">Cancel</button>

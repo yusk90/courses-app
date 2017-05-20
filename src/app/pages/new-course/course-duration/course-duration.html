@@ -2,5 +2,5 @@
        class="form-control course-duration"
        id="{{ inputId }}"
        [(ngModel)]="duration"
-       (change)="durationChange.emit(duration)"
-       required>
+       (blur)="onBlur()"
+       min="0">

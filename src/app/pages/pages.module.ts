@@ -13,13 +13,13 @@ import { NewCourseComponent } from './new-course';
 import { CourseDateComponent } from './new-course/course-date';
 import { CourseDurationComponent } from './new-course/course-duration';
 import { MaxLengthValidatorDirective } from './new-course/max-length-validator.directive';
-import { CourseDurationPipe } from './courses/course/course-duration.pipe';
 import {
   CreationDateHighlightDirective
 } from './courses/course/creation-date-highlight.directive';
 import { OrderByDatePipe } from './courses/order-by-date.pipe';
 
 import { ComponentsModule } from '../components';
+import { SharedModule } from '../shared';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,6 @@ import { ComponentsModule } from '../components';
     CourseDateComponent,
     CourseDurationComponent,
     MaxLengthValidatorDirective,
-    CourseDurationPipe,
     CreationDateHighlightDirective,
     OrderByDatePipe
   ],
@@ -44,7 +43,8 @@ import { ComponentsModule } from '../components';
     RouterModule,
     CommonModule,
     FormsModule,
-    ComponentsModule
+    ComponentsModule,
+    SharedModule
   ]
 })
 export class PagesModule {}

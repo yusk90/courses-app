@@ -11,15 +11,18 @@ import { LoaderBlockService } from './loader-block/loader-block.service';
 import { AuthorizationService } from './authorization.service';
 import { AuthGuard } from './auth-guard.service';
 import { UserService } from './user.service';
+import { CourseDurationPipe } from './course-duration.pipe';
 
 @NgModule({
   declarations: [
     ConfirmationModalComponent,
-    LoaderBlockComponent
+    LoaderBlockComponent,
+    CourseDurationPipe
   ],
   exports: [
     ConfirmationModalComponent,
-    LoaderBlockComponent
+    LoaderBlockComponent,
+    CourseDurationPipe
   ],
   providers: [
     CoursesService,

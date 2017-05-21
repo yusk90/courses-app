@@ -10,8 +10,8 @@ import { NewCourseComponent } from './pages/new-course';
 export const ROUTES: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'courses', canActivate: [ AuthGuard ] },
   { path: 'courses', component: CoursesComponent, canActivate: [ AuthGuard ] },
-  { path: 'course/:id', component: CourseDetailedComponent, canActivate: [ AuthGuard ]},
+  { path: 'courses/new', component: NewCourseComponent, canActivate: [ AuthGuard ] },
+  { path: 'courses/:id', component: CourseDetailedComponent, canActivate: [ AuthGuard ]},
   { path: 'login', component: LoginComponent },
-  { path: 'add', component: NewCourseComponent, canActivate: [ AuthGuard ] },
   { path: '**', component: NoContentComponent, canActivate: [ AuthGuard ] }
 ];

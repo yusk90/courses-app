@@ -8,6 +8,7 @@
       <span class="date">{{ course.displayDate }}</span>
     </div>
     <div class="description">{{ course.description }}</div>
+    <div class="authors">Authors: {{ course.formattedAuthors }}</div>
   </div>
   <div class="buttons">
     <a [routerLink]="[ '/courses', course.id ]" class="btn btn-block btn-primary">Edit course</a>

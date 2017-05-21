@@ -6,4 +6,6 @@ export interface Course {
   dateInMs?: number;
   displayDate?: string;
   description: string;
+  authors: string[];
+  formattedAuthors?: string;
 }

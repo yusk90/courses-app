@@ -66,6 +66,7 @@ export class CoursesComponent implements OnInit {
 
       preparedCourse.displayDate = this.datePipe.transform(course.date, 'dd-MM-yyyy');
       preparedCourse.dateInMs = new Date(course.date).getTime();
+      preparedCourse.formattedAuthors = course.authors.join(', ');
       return preparedCourse;
     });
   }

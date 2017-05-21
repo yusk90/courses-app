@@ -75,6 +75,22 @@
     </div>
   </div>
   <div class="form-group">
+    <label class="col-sm-4 control-label">Authors *</label>
+    <div class="col-sm-8"
+         [ngClass]="{
+           'has-error': authorsInput.touched && !authorsInput.valid
+         }">
+      <course-authors [(ngModel)]="courseData.authors"
+                       #authorsInput="ngModel"
+                       name="authors"
+                       required></course-authors>
+      <div *ngIf="authorsInput.touched && authorsInput.errors"
+           class="error-messages">
+        <div *ngIf="authorsInput.errors.required">* choose</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
     <div class="col-sm-offset-4 col-sm-8">
       <button type="submit"
               class="btn btn-primary"

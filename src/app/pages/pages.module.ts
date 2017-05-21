@@ -12,6 +12,7 @@ import { LoginComponent } from './login';
 import { NewCourseComponent } from './new-course';
 import { CourseDateComponent } from './new-course/course-date';
 import { CourseDurationComponent } from './new-course/course-duration';
+import { CourseAuthorsComponent } from './new-course/course-authors';
 import { MaxLengthValidatorDirective } from './new-course/max-length-validator.directive';
 import {
   CreationDateHighlightDirective
@@ -32,6 +33,7 @@ import { SharedModule } from '../shared';
     NewCourseComponent,
     CourseDateComponent,
     CourseDurationComponent,
+    CourseAuthorsComponent,
     MaxLengthValidatorDirective,
     CreationDateHighlightDirective,
     OrderByDatePipe

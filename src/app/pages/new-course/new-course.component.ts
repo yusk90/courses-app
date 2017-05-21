@@ -15,7 +15,8 @@ export class NewCourseComponent {
     title: '',
     description: '',
     duration: 0,
-    date: new Date().toISOString()
+    date: new Date().toISOString(),
+    authors: [ 'Andrew Smith', 'John Doe', 'Jane Doe' ]
   };
 
   constructor(

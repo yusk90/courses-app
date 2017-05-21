@@ -5,18 +5,18 @@ import { RouterModule } from '@angular/router';
 
 import { CoursesComponent } from './courses';
 import { CoursesControlsComponent } from './courses/courses-controls';
-import { CourseComponent } from './courses/course';
+import { CourseItemComponent } from './courses/course-item';
 import { CourseDetailedComponent } from './course-detailed';
 import { NoContentComponent } from './no-content';
 import { LoginComponent } from './login';
-import { NewCourseComponent } from './new-course';
-import { CourseDateComponent } from './new-course/course-date';
-import { CourseDurationComponent } from './new-course/course-duration';
-import { CourseAuthorsComponent } from './new-course/course-authors';
-import { MaxLengthValidatorDirective } from './new-course/max-length-validator.directive';
+import { CourseComponent } from './course';
+import { CourseDateComponent } from './course/course-date';
+import { CourseDurationComponent } from './course/course-duration';
+import { CourseAuthorsComponent } from './course/course-authors';
+import { MaxLengthValidatorDirective } from './course/max-length-validator.directive';
 import {
   CreationDateHighlightDirective
-} from './courses/course/creation-date-highlight.directive';
+} from './courses/course-item/creation-date-highlight.directive';
 import { OrderByDatePipe } from './courses/order-by-date.pipe';
 
 import { ComponentsModule } from '../components';
@@ -26,11 +26,11 @@ import { SharedModule } from '../shared';
   declarations: [
     CoursesComponent,
     CoursesControlsComponent,
-    CourseComponent,
+    CourseItemComponent,
     CourseDetailedComponent,
     NoContentComponent,
     LoginComponent,
-    NewCourseComponent,
+    CourseComponent,
     CourseDateComponent,
     CourseDurationComponent,
     CourseAuthorsComponent,

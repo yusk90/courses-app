@@ -9,13 +9,13 @@ import {
 import { Course } from '../../../shared/course-interface';
 
 @Component({
-  selector: 'course',
-  styleUrls: [ './course.scss' ],
-  templateUrl: './course.html',
+  selector: 'course-item',
+  styleUrls: [ './course-item.scss' ],
+  templateUrl: './course-item.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class CourseComponent {
+export class CourseItemComponent {
   @Input()
   public course: Course;
   @Output()

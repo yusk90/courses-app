@@ -16,8 +16,8 @@ import {
 })
 
 export class CourseAuthorsComponent implements ControlValueAccessor {
-  private authorsList: string[];
-  public authors: Array<{name: string, checked: boolean}>;
+  private authorsList: string[] = [ 'Andrew Smith', 'John Doe', 'Jane Doe' ];
+  public authors: Array<{name: string, selected: boolean}>;
 
   private propagateChange = (_: any) => {};
   private onTouchedCallback = () => {};
@@ -29,15 +29,19 @@ export class CourseAuthorsComponent implements ControlValueAccessor {
 
   public writeValue(authors: string[]) {
     if (authors) {
-      this.authorsList = authors;
-      this.authors = authors.map((author) => ({ name: author, checked: false }));
+      this.authors = this.authorsList.map((author) => {
+        return {
+          name: author,
+          selected: authors.some((name) => name === author)
+        }
+      });
       this.propagateChange(this.selectedAuthors);
     }
   }
 
   get selectedAuthors() {
     return this.authors
-               .filter((author) => author.checked)
+               .filter((author) => author.selected)
                .map((author) => author.name);
   }
 

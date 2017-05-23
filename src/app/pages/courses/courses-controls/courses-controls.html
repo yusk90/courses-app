@@ -3,12 +3,12 @@
         (ngSubmit)="filter(filterQuery)">
     <input type="text"
            class="form-control"
-           placeholder="Name fragment or date"
+           placeholder="Name or description fragment"
            name="filterQuery"
            [(ngModel)]="filterQuery">
     <span class="input-group-btn">
       <button class="btn btn-primary"
-              type="submit">Filter</button>
+              type="submit">Search</button>
     </span>
   </form>
   <button class="btn btn-primary add-course"

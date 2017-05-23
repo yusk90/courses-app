@@ -1,9 +1,9 @@
 <div class="courses">
-  <courses-controls (onFilter)="filter($event)"></courses-controls>
-  <course-item *ngFor="let course of (courses | orderByDate : orderDirections[1])"
+  <courses-controls (onFilter)="coursesService.filter($event)"></courses-controls>
+  <course-item *ngFor="let course of (coursesState.courses | orderByDate : orderDirections[1])"
                [course]="course"
                (onDelete)="openDeleteModal($event)"></course-item>
-  <div *ngIf="!courses.length">
+  <div *ngIf="!coursesState.courses.length">
     No data. Feel free to add new course.
   </div>
 </div>

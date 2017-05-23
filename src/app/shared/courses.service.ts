@@ -24,9 +24,9 @@ export class CoursesService {
     return state;
   }
 
-  public getCourses(query = '') {
+  public getCourses(searchQuery = '') {
     return this.http
-      .get(`${ API_URL }/courses?${ query }access_token=${ this.authorizationService.getToken() }`)
+      .get(`${ API_URL }/courses?access_token=${ this.authorizationService.getToken() }${ searchQuery }`)
       .toPromise()
       .then((response) => state.courses = this.prepareCourses(response.json()));
   }
@@ -56,13 +56,12 @@ export class CoursesService {
       .toPromise();
   }
 
-  public filter(query: string): void {
-    this.getCourses(query && this.generateFilterQuery(query));
+  public filter(searchQuery: string): void {
+    this.getCourses(searchQuery && this.generateFilterQuery(searchQuery));
   }
 
-  private generateFilterQuery(query: string) {
+  private generateFilterQuery(query: string): string {
     const properties = [ 'title', 'description' ];
-
     const searchArray = properties.map((field) => {
       return {
         [field]: {
@@ -70,12 +69,13 @@ export class CoursesService {
         }
       };
     });
-
-    return 'filter=' + JSON.stringify({
+    const searchObject = {
       where: {
         or: searchArray
       }
-    }) + '&';
+    };
+
+    return `&filter=${ JSON.stringify(searchObject) }`;
   }
 
   private prepareCourses(courses) {

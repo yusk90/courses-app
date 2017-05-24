@@ -24,9 +24,9 @@ export class CoursesService {
     return state;
   }
 
-  public getCourses(searchQuery = '') {
+  public getCourses(filterQuery = '') {
     return this.http
-      .get(`${ API_URL }/courses?access_token=${ this.authorizationService.getToken() }${ searchQuery }`)
+      .get(`${ API_URL }/courses?access_token=${ this.authorizationService.getToken() }${ filterQuery }`)
       .toPromise()
       .then((response) => state.courses = this.prepareCourses(response.json()));
   }
@@ -56,11 +56,31 @@ export class CoursesService {
       .toPromise();
   }
 
-  public filter(searchQuery: string): void {
-    this.getCourses(searchQuery && this.generateFilterQuery(searchQuery));
+  public search(searchQuery: string): void {
+    this.getCourses(this.generateFilterQuery({ searchQuery }));
   }
 
-  private generateFilterQuery(query: string): string {
+  private generateFilterQuery(queryObject): string {
+    const searchObj = {};
+
+    if (queryObject.searchQuery) {
+      Object.assign(searchObj, this.generateSearchOject(queryObject.searchQuery));
+    }
+
+    if (queryObject.pagination) {
+      let { limit, skip } = queryObject.pagination;
+
+      Object.assign(searchObj, this.generatePaginationObject(limit, skip));
+    }
+
+    if (!Object.keys(searchObj).length) {
+      return '';
+    }
+
+    return `&filter=${ JSON.stringify(searchObj) }`;
+  }
+
+  private generateSearchOject(query: string) {
     const properties = [ 'title', 'description' ];
     const searchArray = properties.map((field) => {
       return {
@@ -69,13 +89,12 @@ export class CoursesService {
         }
       };
     });
-    const searchObject = {
-      where: {
-        or: searchArray
-      }
-    };
 
-    return `&filter=${ JSON.stringify(searchObject) }`;
+    return { where: { or: searchArray } };
+  }
+
+  private generatePaginationObject(limit: number, skip: number) {
+    return { limit, skip };
   }
 
   private prepareCourses(courses) {

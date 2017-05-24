@@ -1,5 +1,5 @@
 <div class="courses">
-  <courses-controls (onFilter)="coursesService.filter($event)"></courses-controls>
+  <courses-controls (onFilter)="coursesService.search($event)"></courses-controls>
   <course-item *ngFor="let course of (coursesState.courses | orderByDate : orderDirections[1])"
                [course]="course"
                (onDelete)="openDeleteModal($event)"></course-item>

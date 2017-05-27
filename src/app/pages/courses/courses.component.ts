@@ -19,7 +19,6 @@ import {
 export class CoursesComponent implements OnInit {
   public coursesState;
   public courseIdForDelete: number;
-  public orderDirections: string[] = [ 'asc', 'desc' ];
 
   constructor(
     public coursesService: CoursesService,
@@ -29,18 +28,14 @@ export class CoursesComponent implements OnInit {
   ) {}
 
   public ngOnInit() {
-    this.coursesService.getCourses();
+    this.coursesService.get();
     this.coursesState = this.coursesService.getState();
   }
 
   public deleteCourse(id: number): void {
     this.loaderBlockService.show();
     this.coursesService.deleteCourse(id)
-      .then(() => {
-        this.loaderBlockService.hide();
-        this.coursesState.courses
-          .splice(this.coursesState.courses.findIndex((course) => course.id === id), 1);
-      });
+      .then(this.onSuccessDelete.bind(this));
   }
 
   public openDeleteModal(courseId: number): void {
@@ -50,5 +45,10 @@ export class CoursesComponent implements OnInit {
       cancelButtonText: 'No',
       onSubmit: this.deleteCourse.bind(this, courseId)
     });
+  }
+
+  private onSuccessDelete(): void {
+    this.loaderBlockService.hide();
+    this.coursesService.get();
   }
 }

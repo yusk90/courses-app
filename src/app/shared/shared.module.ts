@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ModalModule } from 'ng2-bootstrap/modal';
 
 import { CoursesService } from './courses.service';
+import { CoursesFilterService } from './courses-filter.service';
 import { ConfirmationModalComponent } from './confirmation-modal';
 import { LoaderBlockComponent } from './loader-block';
 import { ConfirmationModalService } from './confirmation-modal/confirmation-modal.service';
@@ -26,6 +27,7 @@ import { CourseDurationPipe } from './course-duration.pipe';
   ],
   providers: [
     CoursesService,
+    CoursesFilterService,
     ConfirmationModalService,
     LoaderBlockService,
     AuthorizationService,

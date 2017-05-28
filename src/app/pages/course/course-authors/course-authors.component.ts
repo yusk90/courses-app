@@ -33,7 +33,7 @@ export class CourseAuthorsComponent implements ControlValueAccessor {
         return {
           name: author,
           selected: authors.some((name) => name === author)
-        }
+        };
       });
       this.propagateChange(this.selectedAuthors);
     }

@@ -33,7 +33,7 @@ export class CourseComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.route.params
       .subscribe((params: Params) => {
         const id = params['id'];

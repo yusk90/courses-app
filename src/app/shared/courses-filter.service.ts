@@ -11,7 +11,6 @@ const DEFAULT_FILTER: FilterConfig = {
   search: { query: '' }
 };
 
-
 @Injectable()
 export class CoursesFilterService {
   public buildFilterQuery(filterConfig?: FilterConfig): string {
@@ -28,8 +27,6 @@ export class CoursesFilterService {
 
       Object.assign(filters, this.buildPaginationFilterObject(limit, skip));
     }
-
-    console.log(filters);
 
     return `&filter=${ JSON.stringify(filters) }`;
   }

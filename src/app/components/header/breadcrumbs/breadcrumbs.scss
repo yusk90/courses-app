@@ -1,0 +1,18 @@
+span {
+  color: #fff;
+
+  & + &::before {
+    content: '>'
+  }
+
+  &:last-child {
+    a {
+      text-decoration: none;
+      cursor: default;
+    }
+  }
+}
+
+a {
+  color: #fff;
+}

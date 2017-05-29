@@ -8,9 +8,12 @@ import { LoginComponent } from './pages/login';
 import { CourseComponent } from './pages/course';
 
 export const ROUTES: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'courses', canActivate: [ AuthGuard ] },
-  { path: 'courses', component: CoursesComponent, canActivate: [ AuthGuard ] },
-  { path: 'courses/:id', component: CourseComponent, canActivate: [ AuthGuard ]},
+  { path: 'courses', component: CoursesComponent, canActivate: [ AuthGuard ], data: { breadcrumb: 'Courses'},
+    children: [
+      { path: ':id', component: CourseComponent, canActivate: [ AuthGuard ], data: { breadcrumb: 'New course'} }
+    ]
+  },
   { path: 'login', component: LoginComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'courses', canActivate: [ AuthGuard ] },
   { path: '**', component: NoContentComponent, canActivate: [ AuthGuard ] }
 ];

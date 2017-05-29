@@ -60,6 +60,7 @@ export class CourseComponent implements OnInit {
 
   private onSuccess(): void {
     this.router.navigate([ '/courses' ]);
+    this.coursesService.get();
   }
 
   private onFail(res): void {

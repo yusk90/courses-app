@@ -15,6 +15,7 @@ import {
   PreloadAllModules
 } from '@angular/router';
 
+import { StoreModule } from '@ngrx/store';
 import { ModalModule } from 'ng2-bootstrap/modal';
 import { CookieModule } from 'ngx-cookie';
 
@@ -63,7 +64,8 @@ type StoreType = {
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
     ModalModule.forRoot(),
-    CookieModule.forRoot()
+    CookieModule.forRoot(),
+    StoreModule.provideStore({})
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

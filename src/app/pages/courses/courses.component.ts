@@ -17,38 +17,25 @@ import {
 })
 
 export class CoursesComponent implements OnInit {
-  public courses: Course[] = [];
+  public coursesState;
   public courseIdForDelete: number;
-  public orderDirections: string[] = [ 'asc', 'desc' ];
-  private cachedCourses: Course[] = [];
 
   constructor(
-    private coursesService: CoursesService,
+    public coursesService: CoursesService,
     private confirmationModalService: ConfirmationModalService,
     private loaderBlockService: LoaderBlockService,
     private datePipe: DatePipe
   ) {}
 
   public ngOnInit() {
-    this.coursesService.getCourses().then((courses) => {
-      this.courses = this.prepareCourses(courses);
-      this.cacheCourses();
-    });
-  }
-
-  public filter(query: string): void {
-    const properties = [ 'title', 'displayDate' ];
-
-    this.courses = query ? this.filterBy(properties, query) : this.cachedCourses;
+    this.coursesService.get();
+    this.coursesState = this.coursesService.getState();
   }
 
   public deleteCourse(id: number): void {
     this.loaderBlockService.show();
     this.coursesService.deleteCourse(id)
-      .then(() => {
-        this.loaderBlockService.hide();
-        this.courses.splice(this.courses.findIndex((course) => course.id === id), 1);
-      });
+      .then(this.onSuccessDelete.bind(this));
   }
 
   public openDeleteModal(courseId: number): void {
@@ -60,23 +47,8 @@ export class CoursesComponent implements OnInit {
     });
   }
 
-  private prepareCourses(courses) {
-    return courses.map((course: Course) => {
-      const preparedCourse = Object.assign({}, course);
-
-      preparedCourse.displayDate = this.datePipe.transform(course.date, 'dd-MM-yyyy');
-      preparedCourse.dateInMs = new Date(course.date).getTime();
-      return preparedCourse;
-    });
-  }
-
-  private filterBy(properties: string[], query: string): Course[] {
-    return this.courses.filter((course: Course) => {
-      return properties.some((property) => course[property].search(query) > -1);
-    });
-  }
-
-  private cacheCourses(): void {
-    this.cachedCourses = this.courses;
+  private onSuccessDelete(): void {
+    this.loaderBlockService.hide();
+    this.coursesService.get();
   }
 }

@@ -1,39 +1,63 @@
 <form class="form-horizontal login"
       name="loginForm"
-      (ngSubmit)="login()"
+      #loginForm="ngForm"
+      (ngSubmit)="logIn()"
       novalidate>
+  <div class="alert alert-warning"
+       *ngIf="isLoginDataIncorrect">
+    Wrong Login or Password
+  </div>
   <div class="form-group">
-    <label for="name" class="col-sm-4 control-label">Login *</label>
+    <label for="username" class="col-sm-4 control-label">Login *</label>
     <div class="col-sm-8"
          [ngClass]="{
-           'has-error': false
+           'has-error': usernameInput.touched && !usernameInput.valid
          }">
       <input type="text"
              class="form-control"
-             id="name"
-             name="name"
-             [(ngModel)]="name"
+             id="username"
+             name="username"
+             [(ngModel)]="username"
+             #usernameInput="ngModel"
+             pattern="[A-Za-z]+"
              required>
+      <div *ngIf="usernameInput.touched && usernameInput.errors"
+           class="error-messages">
+        <div *ngIf="usernameInput.errors.required">* enter</div>
+        <div *ngIf="usernameInput.errors.pattern">
+          Login can contain only English letters.
+        </div>
+      </div>
     </div>
   </div>
   <div class="form-group">
     <label for="password" class="col-sm-4 control-label">Password *</label>
     <div class="col-sm-8"
          [ngClass]="{
-           'has-error': false
+           'has-error': passwordInput.touched && !passwordInput.valid
          }">
       <input type="password"
              class="form-control"
              id="password"
              name="password"
              [(ngModel)]="password"
+             #passwordInput="ngModel"
+             pattern="[A-Za-z0-9]+"
              required>
+      <div *ngIf="passwordInput.touched && passwordInput.errors"
+           class="error-messages">
+        <div *ngIf="passwordInput.errors.required">* enter</div>
+        <div *ngIf="passwordInput.errors.pattern">
+          Password can contain only English letters and numbers.
+        </div>
+      </div>
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-offset-4 col-sm-8">
       <button type="submit"
-              class="btn btn-primary">Log in</button>
+              class="btn btn-primary"
+              [disabled]="!loginForm.valid">Log in</button>
     </div>
   </div>
 </form>

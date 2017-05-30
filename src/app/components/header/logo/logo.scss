@@ -3,10 +3,19 @@
 }
 
 a {
+  display: flex;
   color: #fff;
   text-decoration: none;
-}
+  align-items: center;
 
-.image {
-  width: 57px;
+  &::before {
+    content: "";
+    width: 42px;
+    height: 45px;
+    margin: 0 5px 0 0;
+    background-image: url("./assets/images/angular.svg");
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
 }

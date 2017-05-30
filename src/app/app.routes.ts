@@ -1,13 +1,19 @@
 import { Routes } from '@angular/router';
+
+import { AuthGuard } from './shared/auth-guard.service';
 import { CoursesComponent } from './pages/courses';
 import { CourseDetailedComponent } from './pages/course-detailed';
 import { NoContentComponent } from './pages/no-content';
 import { LoginComponent } from './pages/login';
+import { CourseComponent } from './pages/course';
 
 export const ROUTES: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'courses' },
-  { path: 'courses', component: CoursesComponent },
-  { path: 'course/:id', component: CourseDetailedComponent },
+  { path: 'courses', component: CoursesComponent, canActivate: [ AuthGuard ], data: { breadcrumb: 'Courses'},
+    children: [
+      { path: ':id', component: CourseComponent, canActivate: [ AuthGuard ], data: { breadcrumb: 'New course'} }
+    ]
+  },
   { path: 'login', component: LoginComponent },
-  { path: '**',    component: NoContentComponent }
+  { path: '', pathMatch: 'full', redirectTo: 'courses', canActivate: [ AuthGuard ] },
+  { path: '**', component: NoContentComponent, canActivate: [ AuthGuard ] }
 ];

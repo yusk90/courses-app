@@ -1,0 +1,109 @@
+<form class="form-horizontal course"
+      name="courseForm"
+      #courseForm="ngForm"
+      novalidate>
+  <div class="form-group">
+    <label for="title" class="col-sm-4 control-label">Title *</label>
+    <div class="col-sm-8"
+         [ngClass]="{
+           'has-error': titleInput.touched && !titleInput.valid
+         }">
+      <input type="text"
+             class="form-control"
+             id="title"
+             name="title"
+             [(ngModel)]="courseData.title"
+             #titleInput="ngModel"
+             maximumLength="50"
+             required>
+      <div *ngIf="titleInput.touched && titleInput.errors"
+           class="error-messages">
+        <div *ngIf="titleInput.errors.required">* enter</div>
+        <div *ngIf="titleInput.errors.maximumLength">
+          Max length is {{ titleInput.errors.maximumLength.maxLength }} symbols.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="description" class="col-sm-4 control-label">Description *</label>
+    <div class="col-sm-8"
+         [ngClass]="{
+           'has-error': descriptionInput.touched && !descriptionInput.valid
+         }">
+      <textarea rows="3"
+                class="form-control"
+                id="description"
+                name="description"
+                [(ngModel)]="courseData.description"
+                #descriptionInput="ngModel"
+                maximumLength="500"
+                required></textarea>
+      <div *ngIf="descriptionInput.touched && descriptionInput.errors"
+           class="error-messages">
+        <div *ngIf="descriptionInput.errors.required">* enter</div>
+        <div *ngIf="descriptionInput.errors.maximumLength">
+          Max length is {{ descriptionInput.errors.maximumLength.maxLength }} symbols.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="date" class="col-sm-4 control-label">Date *</label>
+    <div class="col-sm-8">
+      <course-date [inputId]="'date'"
+                   [(date)]="courseData.date"></course-date>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="duration" class="col-sm-4 control-label">Duration *</label>
+    <div class="col-sm-8"
+         [ngClass]="{
+           'has-error': durationInput.touched && !durationInput.valid
+         }">
+      <course-duration [inputId]="'duration'"
+                       [(ngModel)]="courseData.duration"
+                       #durationInput="ngModel"
+                       name="duration"
+                       required></course-duration>
+      {{ courseData.duration | courseDuration }}
+      <div *ngIf="durationInput.touched && durationInput.errors"
+           class="error-messages">
+        <div *ngIf="durationInput.errors.required">* enter</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-4 control-label">Authors *</label>
+    <div class="col-sm-8"
+         [ngClass]="{
+           'has-error': authorsInput.touched && !authorsInput.valid
+         }">
+      <course-authors [(ngModel)]="courseData.authors"
+                       #authorsInput="ngModel"
+                       name="authors"
+                       required></course-authors>
+      <div *ngIf="authorsInput.touched && authorsInput.errors"
+           class="error-messages">
+        <div *ngIf="authorsInput.errors.required">* choose</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-4 col-sm-8">
+      <button type="button"
+              *ngIf="isEdit"
+              class="btn btn-primary"
+              (click)="updateCourse()"
+              [disabled]="!courseForm.valid">Update</button>
+      <button type="button"
+              *ngIf="!isEdit"
+              class="btn btn-primary"
+              (click)="addCourse()"
+              [disabled]="!courseForm.valid">Add</button>
+      <button type="button"
+              class="btn"
+              routerLink="../">Cancel</button>
+    </div>
+  </div>
+</form>

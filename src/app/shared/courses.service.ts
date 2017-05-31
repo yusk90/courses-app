@@ -3,11 +3,15 @@ import { Http } from '@angular/http';
 import { DatePipe } from '@angular/common';
 
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
 
 import { AuthorizationService } from './authorization.service';
 import { CoursesFilterService } from './courses-filter.service';
 import { Course } from './course-interface';
 import { API_URL } from './constants';
+
+import { Store } from '@ngrx/store';
+import { ADD_COURSE, DELETE_COURSE, EDIT_COURSE, ADD_COURSES } from '../pages/courses/courses-reducer';
 
 const state = {
   courses: []
@@ -39,7 +43,8 @@ export class CoursesService {
     private http: Http,
     private authorizationService: AuthorizationService,
     private coursesFilterService: CoursesFilterService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private store: Store<any>
   ) {}
 
   public getState() {
@@ -51,6 +56,14 @@ export class CoursesService {
       .get(`${ API_URL }/courses?access_token=${ this.authorizationService.getToken() }${ filterQuery }`)
       .toPromise()
       .then((response) => this.prepareCourses(response.json()));
+  }
+
+  public getCourses2(filterQuery = '') {
+    return this.http
+      .get(`${ API_URL }/courses?access_token=${ this.authorizationService.getToken() }${ filterQuery }`)
+      .map(res => res.json())
+      .map(payload => ({ type: ADD_COURSES, payload }))
+      .subscribe(action => this.store.dispatch(action));
   }
 
   public get() {

@@ -1,5 +1,8 @@
 <router-outlet></router-outlet>
 <div class="courses">
+  <pre>{{courses | async | json }}</pre>
+  <button class="btn btn-primary" (click)="addCourse({ha: 'ha'})">Add</button>
+  <button class="btn btn-primary" (click)="deleteCourse2(1)">Delete</button>
   <courses-controls (onFilter)="coursesService.search($event)"></courses-controls>
   <course-item *ngFor="let course of coursesState.courses"
                [course]="course"

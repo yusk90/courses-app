@@ -31,6 +31,7 @@ import { AppState, InternalStateType } from './app.service';
 
 import { ComponentsModule } from './components';
 import { PagesModule } from './pages';
+import { coursesReducer } from './pages/courses/courses-reducer';
 import { SharedModule } from './shared';
 
 import '../styles/styles.scss';
@@ -65,7 +66,7 @@ type StoreType = {
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
     ModalModule.forRoot(),
     CookieModule.forRoot(),
-    StoreModule.provideStore({})
+    StoreModule.provideStore({ courses: coursesReducer })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
